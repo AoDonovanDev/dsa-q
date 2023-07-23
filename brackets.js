@@ -4,7 +4,7 @@ It should examine the string and decide if the string is “balanced” — a ba
 properly balanced, such that you never close an bracket that isn’t opened, is out of order, or end up with unclosed brackets. */
 
 
-let exp = "{#}${%{}"
+let exp = "(hi) [there]"
 
 
 class Node {
@@ -55,9 +55,37 @@ class Deque{
     }
 }
 
-const deck = new Deque()
 
-for(let char of exp){
-    deck.push(char)
+function isBalanced(exp){
+    const deck = new Deque;
+    const matches = {
+        '(' : ')',
+        '{' : '}',
+        '[' : ']'
+    }
+    let stack = []
+    for(let i = 0; i < exp.length; i++){
+        let current = stack[stack.length-1]
+        if(exp[i] == '{' || exp[i] == '[' || exp[i] == '('){
+            stack.push(exp[i])
+        }
+        else if((exp[i] == '}' && current == '{') || (exp[i] == ']' && current == '[') || (exp[i] == ')' && current == '(')){
+            stack.pop()
+        }
+        else{
+            console.log(false)
+            return false
+        }
+    }
+    if(stack.length){
+        console.log(false)
+        return false
+    }
+    else{
+        console.log(true)
+    }
+    
+
 }
 
+isBalanced(exp)
